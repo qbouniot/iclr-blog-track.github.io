@@ -10,7 +10,7 @@ Learning something new in real life does not necessarily mean going through a lo
  
 
 <p align="center">
-  <img src="{{ site.url }}/public/images/2021-12-01-meta_mtr/botero.png" width=500 />
+  <img src="{{ site.url }}/public/images/2022-03-25-understanding_mtr_meta/botero.png" width=500 />
 </p>
 
 
@@ -33,7 +33,7 @@ First, let's review the working setup used in their paper.
 In Multi-Task Representation Learning (MTR) -- a setting where a common shared representation is learned for a set of tasks -- we have $T$ source tasks with $n_1$ examples each. For each task $t \in [1, \dots, T]$, the $n_1$ data are sampled i.i.d from a distribution $\mu_t$. During the training phase, we learn a linear predictor $w_i$ for each task and then group them all in a matrix $W$. Throughout training, a common representation $\phi \in \Phi$ is learned, that we use afterwards for a novel target task $T+1$ with $n_2$ examples sampled from $\mu_{T+1}$. Using this common representation, we learn a novel predictor $w_{T+1}$ for the target task. 
 
 <p align="center">
-  <img src="{{ site.url }}/public/images/2021-12-01-meta_mtr/mtr.png" />
+  <img src="{{ site.url }}/public/images/2022-03-25-understanding_mtr_meta/mtr.png" />
 </p>
 
 ## Multi-Task Learning Bounds 
@@ -186,13 +186,13 @@ As mentioned above, meta-learning is a popular choice nowadays when dealing with
 In this case, the task that we construct for the meta-learner consists of only a handful of data points. This way, the meta-learner *learns to learn* with few data, and, when faced with a novel task for which few data is available, it is capable of quickly adapting and producing a learner to solve it. 
 
 <p align="center">
-  <img src="{{ site.url }}/public/images/2021-12-01-meta_mtr/vapnik.png" width=700 />
+  <img src="{{ site.url }}/public/images/2022-03-25-understanding_mtr_meta/vapnik.png" width=700 />
 </p>
 
 How do we *meta-learn* **in practice**? To do so, we construct *episodes*. An episode is an *instance* of a sub-problem of the problem we want to solve. For example, for a specific sub-problem of classification of dogs and cats, it will contain a training and a testing set of images of dogs of cats. In the episode, the training set is called *support set*, and the testing set is called *query set*. Then, these episodes are separated into *meta-training episodes* and *meta-testing episodes*. The meta-learner is trained on the meta-training episodes and evaluated on the meta-testing episodes. 
 In the case of classification problems, an *N-way k-shot episode* is an instance with *N* different classes and *k* images per class. 
 
-![episodes]({{ site.url }}/public/images/2021-12-01-meta_mtr/episodes.png)   
+![episodes]({{ site.url }}/public/images/2022-03-25-understanding_mtr_meta/episodes.png)   
 
 ## Link between multi-task and meta-learning
 
@@ -211,13 +211,13 @@ One may wonder if there is a way to alleviate the difference between the two and
 In these specific but recurring cases, Wang et al. [^9] showed that the episodic framework converges to a solution of the bi-level optimization problem that is close to solution of the joint multi-task learning problem. Their main result can be stated in the case of ANIL and a MTR learning algorithm as follows:
 
 <p align="center">
-  <img src="{{ site.url }}/public/images/2021-12-01-meta_mtr/wang_equation.png" width=900 />
+  <img src="{{ site.url }}/public/images/2022-03-25-understanding_mtr_meta/wang_equation.png" width=900 />
 </p>
 
 As we have typically in practice a low inner-loop learning rate and few adaptation steps as well as a deep neural network, both of the terms bounding the differences in the predictions are small. It means that the learned representation obtained in both cases is negligibly similar and thus the results from the work of Du et al. directly apply in this case. 
 To confirm this, Bouniot et al. [^5] made an empirical analysis of popular meta-learning algorithms in light of the novel assumptions proposed by Du et al. 
     
-![Important Assumptions]({{ site.url }}/public/images/2021-12-01-meta_mtr/assumptions.png)
+![Important Assumptions]({{ site.url }}/public/images/2022-03-25-understanding_mtr_meta/assumptions.png)
 <p align='right'><cite>Adapted from Bouniot et al.</cite></p> 
 
 They showed that satisfying or not these two assumptions can reveal striking differences in the behavior of these algorithms. Their results highlight the importance of the assumptions [2.2](#A2.2) and [2.3](#A2.3) for an efficient few-shot learning in practice. 
