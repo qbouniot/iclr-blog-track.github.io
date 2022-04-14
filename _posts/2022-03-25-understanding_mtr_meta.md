@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Understanding Few-Shot Multi-Task Representation Learning Theory
-authors: Anonymous
+authors: Quentin Bouniot & Ievgen Redko
 tags: [multi-task learning, few-shot learning, learning theory]  # This should be the relevant areas related to your blog post
 excerpt: Multi-Task Representation Learning (MTR) is a popular paradigm to learn shared representations from multiple related tasks. It has demonstrated its efficiency for solving different problems, ranging from machine translation for natural language processing to object detection in computer vision. On the other hand, Few-Shot Learning is a recent problem that seeks to mimic the human capability to quickly learn how to solve a target task with little supervision. For this topic, researchers have turned to meta-learning that learns to learn a new task by training a model on a lot of small tasks. As meta-learning still suffers from a lack of theoretical understanding for its success in few-shot tasks, an intuitively appealing approach would be to bridge the gap between it and multi-task learning to better understand the former using the results established for the latter. In this post, we dive into a recent ICLR 2021 paper by S. Du, W. Hu, S. Kakade, J. Lee and Q. Lei, that demonstrated novel learning bounds for multi-task learning in the few-shot setting and go beyond it by establishing the connections that allow to better understand the inner workings of meta-learning algorithms as well.
 ---
@@ -12,7 +12,7 @@ Learning something new in real life does not necessarily mean going through a lo
 <p align="center">
   <img src="{{ site.url }}/public/images/2022-03-25-understanding_mtr_meta/botero.png" width=500 />
 </p>
-
+<p align='right'><cite>Credits to F. Botero and L. Da Vinci</cite></p> 
 
 As an illustrative example, let's take a look at these paintings from *Leonardo Da Vinci* and *Fernando Botero*.
 It is quite obvious that one would easily guess and recognize the painter who did the painting below after having seen just one example of each painter's styles. 
@@ -188,6 +188,7 @@ In this case, the task that we construct for the meta-learner consists of only a
 <p align="center">
   <img src="{{ site.url }}/public/images/2022-03-25-understanding_mtr_meta/vapnik.png" width=700 />
 </p>
+<p align='right'><cite>Credits to <a href="https://oneweirdkerneltrick.com">oneweirdkerneltrick</a></cite></p> 
 
 How do we *meta-learn* **in practice**? To do so, we construct *episodes*. An episode is an *instance* of a sub-problem of the problem we want to solve. For example, for a specific sub-problem of classification of dogs and cats, it will contain a training and a testing set of images of dogs of cats. In the episode, the training set is called *support set*, and the testing set is called *query set*. Then, these episodes are separated into *meta-training episodes* and *meta-testing episodes*. The meta-learner is trained on the meta-training episodes and evaluated on the meta-testing episodes. 
 In the case of classification problems, an *N-way k-shot episode* is an instance with *N* different classes and *k* images per class. 
